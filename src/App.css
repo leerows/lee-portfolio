@@ -10,6 +10,25 @@ main {
   line-height: 1.6;
 }
 
+.home-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-top: 120px;
+}
+
+.panel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  padding: 52px 40px;
+  border: 1px solid rgba(190, 63, 194, 0.35);
+  border-radius: 24px;
+  background: rgba(17, 17, 17, 0.82);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.50);
+}
+
 .hero {
   display: flex;
   align-items: center;

@@ -23,18 +23,17 @@ function App() {
           </a>
       </nav>
 
-    <main id="home" className="hero">
-      <div className="intro">
-        <h1>Lee Rowson</h1>
-        <p className="bio">Hello! I'm Lee...</p>
-        <p>First-Class Computer Science Graduate from Lancaster University</p>
+    <main id="home" className="home-page">
+      <div className="hero panel">
+        <div className="intro">
+          <h1>Lee Rowson</h1>
+          <p className="bio">Hello! I'm Lee...</p>
+        </div>
+
+        <div className="profile">
+          LR
+        </div>
       </div>
-
-            <div className="profile">
-        LR
-      </div>
-
-
     </main>
     </>
   )
