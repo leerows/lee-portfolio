@@ -3,24 +3,18 @@ import './App.css'
 
 function App() {
   return (
-    <main>
-      <h1>Lee Rowson</h1>
+    <main className="hero">
+      <div className="intro">
+        <h1>Lee Rowson</h1>
+        <p className="bio">Hello! I'm Lee...</p>
+        <p>First-Class Computer Science Graduate from Lancaster University</p>
+      </div>
 
-      <p>Computer Science graduate from Lancaster University.</p>
+            <div className="profile">
+        LR
+      </div>
 
-      <br></br>
 
-      <h2>About me</h2>
-      <p>Coming soon...</p>
-
-      <h2>Projects</h2>
-      <p>Coming soon...</p>
-
-      <h2>Skills</h2>
-      <p>Coming soon...</p>
-
-      <h2>Contact</h2>
-      <p>Coming soon...</p>
     </main>
   )
 }
