@@ -1,0 +1,19 @@
+
+#root {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+main {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+h1 {
+  margin-bottom: 0.25rem;
+}
+
+h2 {
+  margin-top: 2rem;
+}
