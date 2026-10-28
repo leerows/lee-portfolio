@@ -3,11 +3,24 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
+  animation: pageFadeIn 0.7s ease-out both;
 }
 
 main {
   font-family: Arial, sans-serif;
   line-height: 1.6;
+  animation: pageFadeIn 0.8s ease-out both;
+}
+
+@keyframes pageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .home-page {
@@ -105,6 +118,68 @@ main {
   stroke: currentColor;
 }
 
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 15px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+  color: #f1e7fb;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+}
+
+.tag.purple {
+  background: rgba(190, 63, 194, 0.12);
+  border-color: rgba(190, 63, 194, 0.45);
+  color: #f3d6ff;
+}
+
+.tag.blue {
+  background: rgba(62, 132, 255, 0.12);
+  border-color: rgba(62, 132, 255, 0.45);
+  color: #dfeaff;
+}
+
+.tag.pink {
+  background: rgba(255, 98, 178, 0.1);
+  border-color: rgba(255, 98, 178, 0.4);
+  color: #ffd1ed;
+}
+
+.tag.gold {
+  background: rgba(255, 189, 89, 0.12);
+  border-color: rgba(255, 189, 89, 0.4);
+  color: #ffe9b8;
+}
+
+.tag-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.tag-icon svg {
+  width: 12px;
+  height: 12px;
+  stroke: currentColor;
+}
+
 .intro {
   flex: 1;
 }
@@ -126,15 +201,20 @@ main {
 
 .bio {
   max-width: 520px;
-  color: #cccccc;
-  font-size: 25px;
-  font-weight: bold;
-  line-height: 1.7;
+  margin: 0 auto 12px;
+  color: #d8d3df;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  text-transform: none;
 }
 
 h1 {
+  margin: 0 0 10px;
   font-size: 64px;
   font-weight: bold;
+  line-height: 1.08;
   background: linear-gradient(90deg, #ffffff, #be3fc2);
   background-clip: text;
   -webkit-background-clip: text;

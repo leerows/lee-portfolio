@@ -1,6 +1,8 @@
 
 import './App.css'
-import { BriefcaseBusiness, Folder, House, Mail, UserRound } from 'lucide-react'
+import {
+  BriefcaseBusiness, Code2, Folder, House, Mail, Monitor, Server, ShieldCheck, UserRound,
+} from 'lucide-react'
 
 function LinkedinLogo() {
   return (
@@ -24,6 +26,13 @@ function GitHubLogo() {
     </svg>
   )
 }
+
+const skills = [
+  { label: 'IT Professional', icon: Server, color: 'purple' },
+  { label: 'Cyber Security Enthusiast', icon: ShieldCheck, color: 'blue' },
+  { label: 'Software Engineer', icon: Code2, color: 'pink' },
+  { label: 'Web Developer', icon: Monitor, color: 'gold' },
+]
 
 function App() {
   return (
@@ -50,11 +59,17 @@ function App() {
         <div className="hero panel">
           <div className="intro">
             <h1>Lee Rowson</h1>
-            <p className="bio">Hello! I'm Lee...</p>
-            <p>Website Developer</p>
-            <p>Cybersecurity Enthusiast</p>
-            <p>Software Engineer</p>
-            <p>IT Professional</p>
+            <p className="bio">Designing systems, building websites, and keeping things secure.</p>
+            <div className="tag-list" aria-label="Skill tags">
+              {skills.map(({ label, icon: Icon, color }) => (
+                <span key={label} className={`tag ${color}`}>
+                  <span className="tag-icon" aria-hidden="true">
+                    <Icon size={12} />
+                  </span>
+                  {label}
+                </span>
+              ))}
+            </div>
           </div>
 
           <div className="profile">LR</div>
