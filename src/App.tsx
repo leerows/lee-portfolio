@@ -8,6 +8,8 @@ function App() {
 
       <p>Computer Science graduate from Lancaster University.</p>
 
+      <br></br>
+
       <h2>About me</h2>
       <p>Coming soon...</p>
 
