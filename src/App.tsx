@@ -1,8 +1,9 @@
 
+import { useState } from 'react'
 import './App.css'
-import {
-  BriefcaseBusiness, Code2, Folder, House, Mail, Monitor, Server, ShieldCheck, UserRound,
-} from 'lucide-react'
+import lulogo from './assets/LU crest.png'
+import mclogo from './assets/macccollegelogo.jpeg'
+import {BriefcaseBusiness, Code2, Folder, GraduationCap, House,Mail, Monitor, Server, ShieldCheck, UserRound,} from 'lucide-react'
 
 function LinkedinLogo() {
   return (
@@ -28,21 +29,160 @@ function GitHubLogo() {
 }
 
 const skills = [
-  { label: 'IT Professional', icon: Server, color: 'purple' },
-  { label: 'Cyber Security Enthusiast', icon: ShieldCheck, color: 'blue' },
+  { label: 'IT Professional', icon: Server, color: 'pink' },
+  { label: 'Cyber Security Enthusiast', icon: ShieldCheck, color: 'pink' },
   { label: 'Software Engineer', icon: Code2, color: 'pink' },
-  { label: 'Web Developer', icon: Monitor, color: 'gold' },
+  { label: 'Web Developer', icon: Monitor, color: 'pink' },
 ]
 
+function HomePage() {
+  return (
+    <main id="home" className="home-page">
+      <div className="hero panel">
+        <div className="intro">
+          <h1>Lee Rowson</h1>
+          <p className="bio">Designing systems, building websites, and keeping things secure.</p>
+          <div className="tag-list" aria-label="Skill tags">
+            {skills.map(({ label, icon: Icon, color }) => (
+              <span key={label} className={`tag ${color}`}>
+                <span className="tag-icon" aria-hidden="true">
+                  <Icon size={12} />
+                </span>
+                {label}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="profile">LR</div>
+      </div>
+
+      <div className="quick-links panel">
+        <a href="https://www.linkedin.com/in/lee-rowson-799b1b299" target="_blank" rel="noreferrer" className="action-button linkedin-button">
+          <LinkedinLogo />
+          <span>My LinkedIn</span>
+        </a>
+
+        <a href="#projects" className="action-button">
+          <BriefcaseBusiness size={18} />
+          <span>My Projects</span>
+        </a>
+
+        <a href="https://github.com/leerows" target="_blank" rel="noreferrer" className="action-button github-button">
+          <GitHubLogo />
+          <span>My GitHub</span>
+        </a>
+      </div>
+    </main>
+  )
+}
+
+function AboutPage() {
+  return (
+    <main id="about" className="about-page">
+      <section className="about-section">
+        <div className="about-header">
+          <span className="section-icon">
+            <UserRound size={18} />
+          </span>
+          <h2>PROFILE</h2>
+        </div>
+        <hr className="section-divider" />
+
+        <div className="panel profile-panel">
+          <p>
+            Coming soon.
+          </p>
+        </div>
+      </section>
+
+      <section className="about-section">
+        <div className="about-header">
+          <span className="section-icon">
+            <GraduationCap size={18} />
+          </span>
+          <h2>EDUCATION</h2>
+        </div>
+        <hr className="section-divider" />
+
+        <div className="panel profile-panel education-panel">
+          <div className="education-list">
+            <div className="education-item">
+              <div className="education-mark" aria-label="Lancaster University crest">
+                <img
+                  className="education-logo"
+                  src={lulogo}
+                  alt="Lancaster University logo"
+                />
+              </div>
+
+              <div className="education-copy">
+                <h3>BSc (Hons) Computer Science</h3>
+                <p>Lancaster University</p>
+                <p className="education-grade">First Class Honours (1st)</p>
+              </div>
+
+              <span className="education-date">Oct 2023 — Sep 2026</span>
+            </div>
+
+            <div className="education-item">
+              <div className="education-mark secondary-mark" aria-label="Macclesfield College crest">
+                <img
+                  className="education-logo secondary-logo"
+                  src={mclogo}
+                  alt="Macclesfield College logo"
+                />
+              </div>
+
+              <div className="education-copy">
+                <h3>Extended Diploma in Information Technology</h3>
+                <p>Macclesfield College</p>
+                <p className="education-grade">Triple Distinction Star (D*D*D*)</p>
+              </div>
+
+              <span className="education-date">Sep 2020 — Jul 2023</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  )
+}
+
 function App() {
+  const [currentPage, setCurrentPage] = useState<'home' | 'about'>('home')
+
+  const handleNavClick = (page: 'home' | 'about', href: string) => {
+    setCurrentPage(page)
+    window.history.pushState({}, '', href)
+  }
+
   return (
     <>
       <nav className="navbar" aria-label="Main navigation">
-        <a href="#home" className="nav-icon selected" data-tooltip="Home" aria-label="Home">
+        <a
+          href="#home"
+          className={`nav-icon ${currentPage === 'home' ? 'selected' : ''}`}
+          data-tooltip="Home"
+          aria-label="Home"
+          onClick={(event) => {
+            event.preventDefault()
+            handleNavClick('home', '#home')
+          }}
+        >
           <House size={21} />
         </a>
 
-        <a href="#about" className="nav-icon" data-tooltip="About" aria-label="About">
+        <a
+          href="#about"
+          className={`nav-icon ${currentPage === 'about' ? 'selected' : ''}`}
+          data-tooltip="About"
+          aria-label="About"
+          onClick={(event) => {
+            event.preventDefault()
+            handleNavClick('about', '#about')
+          }}
+        >
           <UserRound size={21} />
         </a>
 
@@ -55,43 +195,7 @@ function App() {
         </a>
       </nav>
 
-      <main id="home" className="home-page">
-        <div className="hero panel">
-          <div className="intro">
-            <h1>Lee Rowson</h1>
-            <p className="bio">Designing systems, building websites, and keeping things secure.</p>
-            <div className="tag-list" aria-label="Skill tags">
-              {skills.map(({ label, icon: Icon, color }) => (
-                <span key={label} className={`tag ${color}`}>
-                  <span className="tag-icon" aria-hidden="true">
-                    <Icon size={12} />
-                  </span>
-                  {label}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div className="profile">LR</div>
-        </div>
-
-        <div className="quick-links panel">
-          <a href="https://www.linkedin.com/in/lee-rowson-799b1b299" target="_blank" rel="noreferrer" className="action-button linkedin-button">
-            <LinkedinLogo />
-            <span>My LinkedIn</span>
-          </a>
-
-          <a href="#projects" className="action-button">
-            <BriefcaseBusiness size={18} />
-            <span>My Projects</span>
-          </a>
-
-          <a href="https://github.com/leerows" target="_blank" rel="noreferrer" className="action-button github-button">
-            <GitHubLogo />
-            <span>My GitHub</span>
-          </a>
-        </div>
-      </main>
+      {currentPage === 'home' ? <HomePage /> : <AboutPage />}
     </>
   )
 }
