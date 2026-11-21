@@ -1,9 +1,10 @@
-
 import { useState } from 'react'
 import './App.css'
 import lulogo from './assets/LU crest.png'
 import mclogo from './assets/macccollegelogo.jpeg'
-import {BriefcaseBusiness, Code2, Folder, GraduationCap, House,Mail, Monitor, Server, ShieldCheck, UserRound,} from 'lucide-react'
+import p1 from './assets/portfolioscreenshot.png'
+import p2 from './assets/studentdashboardscreenshot.png'
+import { BriefcaseBusiness, Code2, Folder, GraduationCap, House, Mail, Monitor, Server, ShieldCheck, UserRound } from 'lucide-react'
 
 function LinkedinLogo() {
   return (
@@ -33,6 +34,29 @@ const skills = [
   { label: 'Cyber Security Enthusiast', icon: ShieldCheck, color: 'pink' },
   { label: 'Software Engineer', icon: Code2, color: 'pink' },
   { label: 'Web Developer', icon: Monitor, color: 'pink' },
+]
+
+const projects = [
+  {
+    id: 1,
+    name: 'Portfolio Website',
+    category: 'Web Development',
+    dates: 'Oct 2026 - Present',
+    description:
+      'The website you are currently viewing. This project is a portfolio website built using React, TypeScript, and Vite. It showcases my skills, projects, and experience in web development and design.',
+    tags: ['React', 'TypeScript', 'CSS', 'Vite'],
+    image: p1,
+  },
+  {
+    id: 2,
+    name: 'MyStudent Dashboard',
+    category: 'Web Development',
+    dates: 'Oct 2025 - Apr 2026',
+    description:
+      'A web based student engagement dashboard, designed as my final year Computer Science dissertation at Lancaster University. The platform provides students with a centralised, personalised space to organise their academic activities, manage modules, track assessments and monitor their learning progress.',
+    tags: ['PHP', 'MySQL', 'JavaScript', 'HTML', 'CSS', 'Bootstrap'],
+    image: p2,
+  },
 ]
 
 function HomePage() {
@@ -87,7 +111,6 @@ function AboutPage() {
           </span>
           <h2>PROFILE</h2>
         </div>
-        <hr className="section-divider" />
 
         <div className="panel profile-panel">
           <p>
@@ -103,7 +126,6 @@ function AboutPage() {
           </span>
           <h2>EDUCATION</h2>
         </div>
-        <hr className="section-divider" />
 
         <div className="panel profile-panel education-panel">
           <div className="education-list">
@@ -149,10 +171,96 @@ function AboutPage() {
   )
 }
 
-function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'about'>('home')
+function ProjectsPage() {
+  const [selectedCategory, setSelectedCategory] = useState('All')
 
-  const handleNavClick = (page: 'home' | 'about', href: string) => {
+  const categories = ['All', ...new Set(projects.map((project) => project.category))]
+  const filteredProjects =
+    selectedCategory === 'All'
+      ? projects
+      : projects.filter((project) => project.category === selectedCategory)
+
+  return (
+    <main id="projects" className="projects-page">
+      <section className="about-section">
+        <div className="about-header">
+          <span className="section-icon">
+            <Folder size={18} />
+          </span>
+          <h2>PROJECTS</h2>
+        </div>
+
+        <div className="projects-content">
+          <p className="projects-intro">This page contains a collection of some of the projects I have worked on.</p>
+
+          <div className="project-filter-section">
+            <h3 className="project-filter-header">Filter projects</h3>
+
+            <div className="project-filter-box">
+              <span className="project-filter-label">Category</span>
+              <div className="project-filters" aria-label="Project categories">
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    type="button"
+                    className={`project-filter ${selectedCategory === category ? 'active' : ''}`}
+                    onClick={() => setSelectedCategory(category)}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="projects-list">
+            {filteredProjects.map((project) => (
+              <article key={project.id} className="panel project-panel">
+                <div className="project-visual" aria-label={`${project.name} preview`}>
+                  {project.image ? (
+                    <img src={project.image} alt={`${project.name} preview`} className="project-visual-image" />
+                  ) : (
+                    <span>Screenshot</span>
+                  )}
+                </div>
+
+                <div className="project-content">
+                  <div className="project-topline">
+                    <span className="project-category">{project.category}</span>
+                    <span className="project-date">{project.dates}</span>
+                  </div>
+
+                  <div className="project-header-row">
+                    <h3>{project.name}</h3>
+                  </div>
+
+                  <p className="project-description">{project.description}</p>
+
+                  <div className="project-tags" aria-label={`${project.name} technologies`}>
+                    {project.tags.map((tag) => (
+                      <span key={tag} className="project-tag">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <button type="button" className="project-button">
+                    View project
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+  )
+}
+
+function App() {
+  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'projects'>('home')
+
+  const handleNavClick = (page: 'home' | 'about' | 'projects', href: string) => {
     setCurrentPage(page)
     window.history.pushState({}, '', href)
   }
@@ -186,7 +294,16 @@ function App() {
           <UserRound size={21} />
         </a>
 
-        <a href="#projects" className="nav-icon" data-tooltip="Projects" aria-label="Projects">
+        <a
+          href="#projects"
+          className={`nav-icon ${currentPage === 'projects' ? 'selected' : ''}`}
+          data-tooltip="Projects"
+          aria-label="Projects"
+          onClick={(event) => {
+            event.preventDefault()
+            handleNavClick('projects', '#projects')
+          }}
+        >
           <Folder size={21} />
         </a>
 
@@ -195,7 +312,9 @@ function App() {
         </a>
       </nav>
 
-      {currentPage === 'home' ? <HomePage /> : <AboutPage />}
+      {currentPage === 'home' && <HomePage />}
+      {currentPage === 'about' && <AboutPage />}
+      {currentPage === 'projects' && <ProjectsPage />}
     </>
   )
 }
